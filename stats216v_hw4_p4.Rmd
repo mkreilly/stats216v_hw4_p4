@@ -4,8 +4,44 @@ output: html_notebook
 ---
 
 In this problem we will explore K-means and hierarchical clustering on a wheat seed data set. The data file SeedData.csv is available on the class website. There are n = 210 seeds with p = 7 real valued features for each observation. The data set is from Lichman, M. (2013) from the UCI Machine Learning Repository 1. You can find a full description of the data at http://archive.ics.uci.edu/ml/datasets/seeds#.
+
+
+
+
 (a) Set set.seed(2017). Using the kmeans() function, perform K-means clustering (using all 7 features) with K = 3 and 20 random starting positions. Plot the data in terms of the variables in the 2nd and 6th columns, with the points colored according to the clusters you just obtained.
+
+```{r}
+set.seed(2017)
+
+s <- read.csv("Seed_Data.csv")
+```
+
+
 (b) Using the hclust() function, perform single linkage hierarchical clustering on the data. Plot the corresponding dendrogram.
+
+```{r}
+
+cl_sing <- hclust(dist(s),method="single")
+plot(cl_sing)
+```
+
+
 (c) Using the cutree() function, make a cut on the tree that splits the data into 3 clusters. Plot the data again in terms of the variables in the 2nd and 6th columns, coloring the points by the clusters you just obtained. How does it compare to the result you got using k-means clustering?
+
+```{r}
+cutree(cl_sing,3)
+```
+
+
+
 (d) Using the hclust() function, perform complete linkage hierarchical clustering on the data. Plot the corresponding dendrogram. What do you see? If we wanted to cluster our data into 3 clusters, do you prefer single linkage clustering or complete linkage clustering in this example? Why?
+
+```{r}
+cl_sing <- hclust(dist(s),method="complete")
+plot(cl_sing)
+```
+
+
+
 (e) It turns out that there are three different types of wheat seeds: Kama, Rosa, and Canadian. If you had access to the class labels, briefly describe one way to build a model for classifying wheat seeds. Limit your answer to 1 sentence.
+
